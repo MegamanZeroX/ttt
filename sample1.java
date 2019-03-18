@@ -4,17 +4,21 @@ import java.math.*;
 import java.io.*;
 import javax.imageio.*;
 
+
+
+
+
 public class sample1 {
 	static char[][] mp = new char[3][3];
 	static int[] x = {0,0,1,1,1};
 	static int[] y = {0,1,0,1,-1};
-	static void init()//ÆåÅÌÊı¾İ³õÊ¼»¯
+	static void init()//æ£‹ç›˜æ•°æ®åˆå§‹åŒ–
 	{
 		for(int i=0;i<3;i++)
 			for(int j=0;j<3;j++)
 				mp[i][j] = (char)(i*3+j+1+(int)('0'));
 	}
-	static String show()//ÆåÅÌÕ¹Ê¾
+	static String show()//æ£‹ç›˜å±•ç¤º
 	{
 		String rowLine = "-----------------";
 		String res = rowLine;
@@ -31,7 +35,7 @@ public class sample1 {
 		
 		return res;
 	}
-	static boolean dfs(int i,int j,int cnt,int dir,char type)//ÉîËÑÈı¸öÁ¬ĞøÅÅÁĞÍ¬ÀàÆå×ÓµÄº¯Êı
+	static boolean dfs(int i,int j,int cnt,int dir,char type)//æ·±æœä¸‰ä¸ªè¿ç»­æ’åˆ—åŒç±»æ£‹å­çš„å‡½æ•°
 	{
 		if(cnt == 3) return true;
 		else {
@@ -41,18 +45,18 @@ public class sample1 {
 			return dfs(nextx,nexty,cnt+1,dir,type);
 		}
 	}
-	static int check()	//Ã¿ÏÂÒ»²½½øĞĞÑéÖ¤º¯Êı£¬
+	static int check()	//æ¯ä¸‹ä¸€æ­¥è¿›è¡ŒéªŒè¯å‡½æ•°ï¼Œ
 	{
 		int res = 0;
 		for(int i=0;i<3;i++)
 		{
 			for(int j=0;j<3;j++)
 			{
-				if(mp[i][j] == '*'){//Íæ¼Ò·½ÑéÖ¤£¬ÕÒ³öÃ¿Ò»¸öÍæ¼ÒµÄÆå×Ó½øĞĞËÄ¸ö·½ÏòÑéÖ¤
+				if(mp[i][j] == '*'){//ç©å®¶æ–¹éªŒè¯ï¼Œæ‰¾å‡ºæ¯ä¸€ä¸ªç©å®¶çš„æ£‹å­è¿›è¡Œå››ä¸ªæ–¹å‘éªŒè¯
 					boolean flag = dfs(i,j,1,1,mp[i][j])||dfs(i,j,1,2,mp[i][j])||dfs(i,j,1,3,mp[i][j])||dfs(i,j,1,4,mp[i][j]);
 					if(flag) return 1;
 				}
-				else if(mp[i][j] == 'O'){//µçÄÔ·½ÑéÖ¤£¬ÕÒ³öÃ¿Ò»¸öµçÄÔµÄÆå×Ó½øĞĞËÄ¸ö·½ÏòÑéÖ¤
+				else if(mp[i][j] == 'O'){//ç”µè„‘æ–¹éªŒè¯ï¼Œæ‰¾å‡ºæ¯ä¸€ä¸ªç”µè„‘çš„æ£‹å­è¿›è¡Œå››ä¸ªæ–¹å‘éªŒè¯
 					boolean flag = dfs(i,j,1,1,mp[i][j])||dfs(i,j,1,2,mp[i][j])||dfs(i,j,1,3,mp[i][j])||dfs(i,j,1,4,mp[i][j]);
 					if(flag) return 2;
 				}
@@ -68,25 +72,25 @@ public class sample1 {
 		while(result == 0)
 		{
 			String chess = show();
-			chess = chess +"\n" +  "Ñ¡ÔñÒ»¸öÊı×Ö±àºÅÂä×Ó";
+			chess = chess +"\n" +  "é€‰æ‹©ä¸€ä¸ªæ•°å­—ç¼–å·è½å­";
 			String player = JOptionPane.showInputDialog(chess);
 			System.out.println(player.charAt(0));
 			int c = (int)(player.charAt(0)-'0') - 1;
 			if(c==-1){break;}
-			if(c<0||c>8||mp[c/3][c%3]>'9'||mp[c/3][c%3]<'1'){//ÅĞ¶¨ÊÇ·ñ¿ÉÒÔ·ÅÆå×Ó
+			if(c<0||c>8||mp[c/3][c%3]>'9'||mp[c/3][c%3]<'1'){//åˆ¤å®šæ˜¯å¦å¯ä»¥æ”¾æ£‹å­
 				continue;
 			}
 			mp[c/3][c%3] = '*';	cnt++;
 			result = check();
 			if (result==1){
 				chess = show();
-				chess = chess + "\n"+"ÄãÓ®ÁË\n";
+				chess = chess + "\n"+"ä½ èµ¢äº†\n";
 				JOptionPane.showMessageDialog(null,chess);
 				break;
 			}
-			if(cnt==9){//Íæ¼ÒÓÖÏÂÒ»²½ºóÎ´Ó®ÇÒÆåÅÌÎŞ¿ÕµØ£¬Æ½¾Ö
+			if(cnt==9){//ç©å®¶åˆä¸‹ä¸€æ­¥åæœªèµ¢ä¸”æ£‹ç›˜æ— ç©ºåœ°ï¼Œå¹³å±€
 				chess = show();
-				chess = chess +"\n"+ "Æ½¾Ö\n";
+				chess = chess +"\n"+ "å¹³å±€\n";
 				JOptionPane.showMessageDialog(null,chess);
 				break;
 			}
@@ -98,7 +102,7 @@ public class sample1 {
 			result = check();
 			if(result==2){
 				chess = show();
-				chess = chess +"\n"+ "ÄãÊäÁË\n";
+				chess = chess +"\n"+ "ä½ è¾“äº†\n";
 				JOptionPane.showMessageDialog(null,chess);
 				break;
 			}
